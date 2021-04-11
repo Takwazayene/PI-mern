@@ -1,0 +1,37 @@
+import React from 'react';
+import {useQuery} from '@apollo/react-hooks'
+import {Grid} from 'semantic-ui-react'
+import PostCard from './PostCard'
+import "../../styles/user/post.css";
+import PostForm from '../../components/chat/PostForm'
+import {FETCH_POSTS_QUERY} from '../../util/graphql'
+
+function Post() {
+    const { loading, data } = useQuery(FETCH_POSTS_QUERY);
+
+    const { getPosts: posts } = data ? data : [];
+    return(
+        <Grid columns={3} >
+           <Grid.Row className="page-title">
+               <h1>Recent Posts</h1>
+               </Grid.Row>  
+    <Grid.Row>
+    <Grid.Column>
+        <PostForm />
+      </Grid.Column> 
+    {loading ? (
+        <h1>loading posts...</h1>
+    ): (
+        posts && posts.map(post=> (
+            <Grid.Column key={post.id} style = {{marginBottom:20}}>
+            <PostCard post = {post} />
+
+            </Grid.Column>
+        ))
+    )}
+    </Grid.Row>
+    </Grid>
+    );
+}
+
+export default Post ;
