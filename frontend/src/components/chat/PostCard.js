@@ -1,11 +1,12 @@
 import React from 'react';
-import { Button, Card, Icon, Label, Image } from 'semantic-ui-react';
+import { Button, Card, Icon, Label, Image  } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import {useDispatch ,useSelector } from "react-redux";
 import {loginUserfind, selectConnectuser, } from "../../redux/slices/userSlice";
 import  LikeButton from './LikeButton' ;
 import DeleteButton from './DeleteButton'
+import MyPopup from '../../util/MyPopup';
 
 function PostCard({
   post: { body, createdAt, id, username, likeCount, commentCount, likes }
@@ -35,16 +36,20 @@ function PostCard({
       </Card.Content>
       <Card.Content extra>
         <LikeButton user={connectUser} post ={{id, likes,likeCount}}/>
-       
-    <Button  labelPosition='right' as={Link} to={`/homeuser/user/posts/${id}`}>
-      <Button color='blue' basic>
-        <Icon name='comments' />
-        
-      </Button>
-      <Label  basic color='blue' pointing='left'>
-      {commentCount}
-      </Label>
-    </Button>     
+       <MyPopup content="comment on post">
+       <Button  labelPosition='right' as={Link} to={`/homeuser/user/posts/${id}`}>
+                <Button color='blue' basic>
+                  <Icon name='comments' />
+                  
+                </Button>
+                <Label  basic color='blue' pointing='left'>
+                {commentCount}
+                </Label>
+              </Button> 
+
+         </MyPopup>
+
+ 
         {connectUser.username === username && 
          <DeleteButton postId={id}/>
    }

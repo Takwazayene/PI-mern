@@ -16,6 +16,7 @@ import {useDispatch ,useSelector } from "react-redux";
 import LikeButton from './LikeButton';
 import DeleteButton from './DeleteButton';
 import {loginUserfind, selectConnectuser, } from "../../redux/slices/userSlice";
+import MyPopup from '../../util/MyPopup';
 
 function SinglePost(props) {
     console.log(props) ;
@@ -85,8 +86,8 @@ function SinglePost(props) {
               <hr />
               <Card.Content extra>
                 <LikeButton user={connectUser} post={{ id, likeCount, likes }} />
-               
-                  <Button
+                <MyPopup content="comment on post">
+                <Button
                     as="div"
                     labelPosition="right"
                     onClick={() => console.log('Comment on post')}
@@ -98,6 +99,9 @@ function SinglePost(props) {
                       {commentCount}
                     </Label>
                   </Button>
+
+
+               </MyPopup>
                 {connectUser.username === username && (
                   <DeleteButton postId={id} callback={deletePostCallback} />
                 )}
