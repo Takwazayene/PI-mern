@@ -1,7 +1,3 @@
-
-
-const { argsToArgsConfig } = require('graphql/type/definition');
-const checkAuth = require('../../../../../yt/classsed-graphql-mern-apollo-master/classsed-graphql-mern-apollo-master/util/check-auth');
 const Post=require('../../models/Post');
 
 module.exports={
@@ -32,8 +28,8 @@ Mutation : {
     async createPost(_,{body},context) {
        // const user = checkAuth(context);
        // console.log(user);
-       if(body.trim()==='') {
-           throw new Error('Post body must not emty');
+         if(body.trim()==='') {
+           throw new Error('Post body must not be empty');
        }
         const newPost = new Post ({
             body,
@@ -43,7 +39,9 @@ Mutation : {
         }) ;
         const post = await newPost.save();
 
-       
+        context.pubsub.publish('NEW_POST', {
+            newPost: post
+          });
     
         return post;
     },
@@ -83,5 +81,10 @@ Mutation : {
         } else throw new UserInputError('Post not found');
       }
     },
+    Subscription: {
+        newPost: {
+          subscribe: (_, __, { pubsub }) => pubsub.asyncIterator('NEW_POST')
+        }
+      }
 
 };

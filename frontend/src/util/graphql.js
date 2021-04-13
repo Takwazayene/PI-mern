@@ -7,10 +7,11 @@ import gql from 'graphql-tag';
      body
      createdAt
      username
-
+     likeCount
      likes{
          username
      }
+     commentCount
      comments {
        id
        username

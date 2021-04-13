@@ -32,7 +32,7 @@ import MenuBar from './chat/MenuBar'
 import Post from './chat/Post'
 import {Container} from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
-
+import SinglePost from './chat/SinglePost';
 
 
 export default function HomeUser(props) {
@@ -86,9 +86,12 @@ export default function HomeUser(props) {
               <Route path="/homeuser/user/vehicleshot"  component={VehicleShotUser} />
               <Route path="/homeuser/user/takwa"  component={TakwaUser} />
               <Route path="/homeuser/user/menuBar"  component={MenuBar} />
+
               <Container>
                 <MenuBar/>
               <Route path="/homeuser/user/post"  component={Post} />
+              <Route path="/homeuser/user/posts/:id"  component={SinglePost} />
+
               </Container>
 
 

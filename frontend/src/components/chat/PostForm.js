@@ -25,6 +25,9 @@ function PostForm() {
               proxy.writeQuery({ query: FETCH_POSTS_QUERY,  variables: values,data });
               values.body = '';
             
+        },
+        onError(err){
+            //console.log(err)
         }
       });
       function createPostCallback() {
@@ -32,14 +35,16 @@ function PostForm() {
       }
 
     return (
+        <>
         <Form onSubmit={onSubmit}>
           <h2>Create a post :</h2>
           <Form.Field>
               <Form.Input
-                placeholder="Hi world!"
+                placeholder="post your delivery offer with the necessary details !"
                 name="body"
                 onChange={onChange}
                 value={values.body}
+                error={error ? true : false}
                  />
               <Button type="submit" color="teal">
                   Submit
@@ -52,6 +57,14 @@ function PostForm() {
 
 
         </Form>
+        {error && (
+        <div className="ui error message" style={{ marginBottom: 20 }}>
+          <ul className="list">
+            <li>{error.graphQLErrors[0].message}</li>
+          </ul>
+        </div>
+      )}
+        </>
     )
 
 
@@ -59,7 +72,7 @@ function PostForm() {
 const CREATE_POST_MUTATION = gql`
   mutation createPost($body: String!) {
     createPost(body: $body) {
-      id
+      id 
       body
       createdAt
       username 
@@ -68,13 +81,14 @@ const CREATE_POST_MUTATION = gql`
         username
         createdAt
       }
-      
+      likeCount
       comments {
         id
         body
         username
         createdAt
       }  
+      commentCount
     
     }
   }

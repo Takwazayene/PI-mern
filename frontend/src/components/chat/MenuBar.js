@@ -15,23 +15,23 @@ function MenuBar() {
   return (
     <Menu pointing secondary size="massive" color="teal">
       <Menu.Item 
-      name="post"
-       active ={activeItem==='post'} 
+      name="Posts"
+       active ={activeItem==='Posts'} 
        onClick={handleItemClick}
        as = {Link}
        to="/homeuser/user/post"
        />
       <Menu.Menu position="right">
         <Menu.Item 
-        name="login"
-        active ={activeItem==='login'}
+        name="My posts"
+        active ={activeItem==='My posts'}
          onClick={handleItemClick} 
        as = {Link}
        to="/login"
       />
       <Menu.Item
-        name="register"
-        active={activeItem === 'registrer'}
+        name="Profile"
+        active={activeItem === 'Profile'}
         onClick={handleItemClick}
         as={Link}
         to="/register"

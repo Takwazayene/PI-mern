@@ -1,6 +1,6 @@
 import React from 'react';
 import {useQuery} from '@apollo/react-hooks'
-import {Grid} from 'semantic-ui-react'
+import {Grid,Transition} from 'semantic-ui-react'
 import PostCard from './PostCard'
 import "../../styles/user/post.css";
 import PostForm from '../../components/chat/PostForm'
@@ -22,12 +22,14 @@ function Post() {
     {loading ? (
         <h1>loading posts...</h1>
     ): (
-        posts && posts.map(post=> (
-            <Grid.Column key={post.id} style = {{marginBottom:20}}>
-            <PostCard post = {post} />
-
-            </Grid.Column>
-        ))
+     
+            posts && posts.map((post)=> (
+              <Grid.Column key={post.id} style = {{marginBottom:20}}>
+              <PostCard post = {post} />
+  
+              </Grid.Column>
+          ))
+      
     )}
     </Grid.Row>
     </Grid>
