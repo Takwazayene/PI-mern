@@ -15,7 +15,10 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var authRouter = require('./routes/auth');
 var mailRouter = require('./routes/mail');
+var freeDeliveryRouter = require('./routes/freeDelivery');
+var smsRouter = require('./routes/sms');
 
+const twilio = require('twilio') ;
 var app = express();
 
 // view engine setup
@@ -55,6 +58,8 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/auth', authRouter);
 app.use('/mail', mailRouter);
+app.use('/freeDelivery',freeDeliveryRouter)
+app.use('/sms',smsRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

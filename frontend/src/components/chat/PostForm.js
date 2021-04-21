@@ -4,12 +4,17 @@ import {useForm} from '../../util/hooks'
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks';
 import {FETCH_POSTS_QUERY} from '../../util/graphql'
+import {useDispatch ,useSelector } from "react-redux";
+import {loginUserfind, selectConnectuser, } from "../../redux/slices/userSlice";
 
 
 function PostForm() {
-
+  const [connectUser, error2] = useSelector(selectConnectuser);
     const {values,onChange,onSubmit} = useForm(createPostCallback,{
-        body:''
+        body:'' ,
+        user : connectUser.id,
+        username: connectUser.username
+
     }) ;
 
     const [createPost, { error }] = useMutation(CREATE_POST_MUTATION, {
@@ -60,7 +65,7 @@ function PostForm() {
         {error && (
         <div className="ui error message" style={{ marginBottom: 20 }}>
           <ul className="list">
-            <li>{error.graphQLErrors[0].message}</li>
+          <li>{error.graphQLErrors[0].message}</li>
           </ul>
         </div>
       )}
@@ -70,8 +75,8 @@ function PostForm() {
 
 }
 const CREATE_POST_MUTATION = gql`
-  mutation createPost($body: String!) {
-    createPost(body: $body) {
+  mutation createPost($body: String!, $user:String!,$username:String!) {
+    createPost(body: $body, user:$user,username:$username ) {
       id 
       body
       createdAt

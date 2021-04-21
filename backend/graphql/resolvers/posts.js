@@ -22,10 +22,31 @@ module.exports={
           }catch(err) {
               throw new Error(err);
           }
-      }
+      } ,
+      async getPostByUser(_,{user}) {
+        try {
+          
+     /*       const post = await Post
+      .find({ 'posts.user' : user })
+      .lean()
+      .exec() */
+
+      const post = await Post
+      .find({user:user})
+      
+
+            if (post) {
+                return post ;
+            } else {
+                throw new Error('Post not found');
+            }
+        }catch(err) {
+            throw new Error(err);
+        }
+    }
 },
 Mutation : {
-    async createPost(_,{body},context) {
+    async createPost(_,{body,user,username},context) {
        // const user = checkAuth(context);
        // console.log(user);
          if(body.trim()==='') {
@@ -33,8 +54,8 @@ Mutation : {
        }
         const newPost = new Post ({
             body,
-            user:"606ddfc130511542682dc0e1" ,
-            username:"takwa",
+            user, 
+            username,
             createdAt: new Date().toISOString()
         }) ;
         const post = await newPost.save();
@@ -60,18 +81,18 @@ Mutation : {
           throw new Error(err);
         }
       },
-      async likePost(_, { postId }, context) {
+      async likePost(_, { postId ,username }, context) {
        // const { username } = checkAuth(context);
   
         const post = await Post.findById(postId);
         if (post) {
-          if (post.likes.find((like) => like.username === "takwa")) {
+          if (post.likes.find((like) => like.username === username )) {
             // Post already likes, unlike it
-            post.likes = post.likes.filter((like) => like.username !== "takwa");
+            post.likes = post.likes.filter((like) => like.username !== username);
           } else {
             // Not liked, like post
             post.likes.push({
-              username:"takwa",
+              username,
               createdAt: new Date().toISOString()
             });
           }

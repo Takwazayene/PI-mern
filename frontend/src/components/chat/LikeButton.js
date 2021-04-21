@@ -5,10 +5,10 @@ import { Button, Label, Icon } from 'semantic-ui-react';
 import MyPopup from '../../util/MyPopup';
 
 
-function LikeButton({ user, post: { id, likeCount, likes } }){
+function LikeButton({ user, post: { id, likes,likeCount } }){
 
     const [liked, setLiked] = useState(false);
-
+     
     useEffect(() => {
       if (user && likes.find((like) => like.username === user.username)) {
         setLiked(true);
@@ -17,7 +17,7 @@ function LikeButton({ user, post: { id, likeCount, likes } }){
 
 
     const [likePost] = useMutation(LIKE_POST_MUTATION, {
-        variables: { postId: id }
+        variables: { postId: id , username:user.username}
       });
 
 
@@ -50,8 +50,8 @@ return(
 
 
 const LIKE_POST_MUTATION = gql`
-  mutation likePost($postId: ID!) {
-    likePost(postId: $postId) {
+  mutation likePost($postId: ID!,$username:String!) {
+    likePost(postId: $postId,username: $username) {
       id
       likes {
         id

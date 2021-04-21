@@ -101,6 +101,16 @@ export default function Sidebar() {
                   </span>
                   <span className="title">Delivery</span>
                 </NavLink>
+                
+              </li>
+              <li>
+                <NavLink to="/homeuser/admin/listFreeDeliveries">
+                  <span className="icon">
+                    <i className="fa fa-archive"></i>
+                  </span>
+                  <span className="title">Free Delivery</span>
+                </NavLink>
+
               </li>
             </ul>
           </div>

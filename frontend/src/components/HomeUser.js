@@ -14,6 +14,7 @@ import UsersAdmin from "./admin/Users"
 import CompanyAdmin from "./admin/Company"
 import DeliveryAdmin from "./admin/Delivery"
 import UserscircuitAdmin from "./admin/Userscircuit"
+import FreeDeliveries from "./admin/takwa/FreeDeliveries"
 import HomeCompany from './company/Home'
 import ProfileCompany from './company/Profile'
 import DeliveryManCompany from './company/DeliveryMan'
@@ -33,6 +34,11 @@ import Post from './chat/Post'
 import {Container} from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 import SinglePost from './chat/SinglePost';
+import MyPosts from './chat/MyPosts';
+import ListFreeDelivery2 from "./user/freeDelivery/ListDeliveries2";
+import EditDelivery from "./user/freeDelivery/editDelivery";
+import addDelivery from "./user/freeDelivery/addDelivery";
+import passedDelivery from   "./user/freeDelivery/PassedDelivery";
 
 
 export default function HomeUser(props) {
@@ -86,11 +92,18 @@ export default function HomeUser(props) {
               <Route path="/homeuser/user/vehicleshot"  component={VehicleShotUser} />
               <Route path="/homeuser/user/takwa"  component={TakwaUser} />
               <Route path="/homeuser/user/menuBar"  component={MenuBar} />
+              
+              <Route path="/homeuser/user/listDeliveries" component={ListFreeDelivery2} />
+              <Route path="/homeuser/user/editDelivery/:id" component={EditDelivery} />
+              <Route path="/homeuser/user/addDelivery" component={addDelivery} />
+              <Route path="/homeuser/user/passedDelivery" component={passedDelivery} />
+
 
               <Container>
                 <MenuBar/>
               <Route path="/homeuser/user/post"  component={Post} />
               <Route path="/homeuser/user/posts/:id"  component={SinglePost} />
+              <Route path="/homeuser/user/posts/myposts"  component={MyPosts} />
 
               </Container>
 
@@ -106,6 +119,9 @@ export default function HomeUser(props) {
               <Route path="/homeuser/admin/company" component={CompanyAdmin} />
               <Route path="/homeuser/admin/delivery" component={DeliveryAdmin} />
               <Route path="/homeuser/admin/userscircuit" component={UserscircuitAdmin}/>
+              <Route path="/homeuser/admin/listFreeDeliveries" component={FreeDeliveries}/>
+
+
             </Switch>
           </div>):(<></>)}
           {connectUser.role ==="company" ? (

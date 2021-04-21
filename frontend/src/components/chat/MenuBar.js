@@ -27,7 +27,7 @@ function MenuBar() {
         active ={activeItem==='My posts'}
          onClick={handleItemClick} 
        as = {Link}
-       to="/login"
+       to="/homeuser/user/posts/myposts"
       />
       <Menu.Item
         name="Profile"
