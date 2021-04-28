@@ -2,6 +2,7 @@ var express = require('express');
 const asyncHandler = require('express-async-handler');
 var FreeDelivery = require('../models/freeDelivery');
 const twilio = require('twilio'); 
+const User = require('../models/user')
 
 const accountSid = 'ACe735327a96603551e48cadf9e116b953';
 const authToken = 'dc17df17ca3ef2f9ac390e17a4ebbf68'; 
@@ -12,8 +13,8 @@ var router = express.Router();
 
 
 router.post('/add',(async(req,res)=>{
+  req.body.quantiteDispo= req.body.quantite;
     const freeDelivery=await FreeDelivery.create({...req.body});
-  
     if(freeDelivery) {
       res.status(200) ;
       res.json({data:freeDelivery}) ;
@@ -26,10 +27,41 @@ router.post('/add',(async(req,res)=>{
   );
 
 
-  router.get('/'  , async (req, res) => {
+  router.get('/afftoAdmin'  , async (req, res) => {
   
     var freeDeliveries = await FreeDelivery.find()
-    res.send(freeDeliveries);
+    if (!freeDeliveries) {
+      return res.status(400).json({ message: "not found " }).end()
+    }
+     console.log( freeDeliveries.affectedTo)
+    res.send({ freeDeliveries, data: freeDeliveries.affectedTo })
+  });
+
+  router.get('/'  , async (req, res) => { 
+  
+    var freeDeliveries = await FreeDelivery.find()
+  
+    res.send (freeDeliveries  );
+
+  });
+
+  router.get('/affectedTo/:idDel'  , async (req, res) => { 
+  
+    try {
+      const freeDeliveries = await FreeDelivery
+        .findOne({ _id: req.params.idDel })
+        .lean()
+        .exec()
+  
+      if (!freeDeliveries) {
+        return res.status(400).json({ message: "the delivery is probably deleted " }).end()
+      }
+  
+      res.status(200).send({ data: freeDeliveries.affectedTo })
+    } catch (e) {
+      console.error(e)
+      res.status(400).end()
+    }
   });
   
 
@@ -80,19 +112,30 @@ router.post('/add',(async(req,res)=>{
   });
 
 
-  router.put('/passedDelivery/:id/:idUser',asyncHandler(async(req,res)=>{
+  router.put('/passedDelivery/:id/:affectedTo/:quantiteDispo',asyncHandler(async(req,res)=>{
     //res.send(req.params.id)   
-     idUser = req.params.idUser;
+    affectedTo = req.params.affectedTo;
+    quantiteDispo =  req.params.quantiteDispo;
+    nvquantite = req.params.quantiteDispo - 1; 
+    state="valid"
+    if(quantiteDispo==1) {
+      state="invalid"
+    }
     try {
+    
+
     const updatedDelivery = await FreeDelivery
     .updateOne(
       { _id: req.params.id },
-{ $set: { "state" : "invalid","affectedTo":idUser} }
+{ $set: { "state" :state , "quantiteDispo" : nvquantite }, 
+$push:{
+  'affectedTo': affectedTo
+} }
     )
     .lean()
     .exec()
 
-
+    
     if (!updatedDelivery) {
       return res.status(400).json({ message: "not found " }).end()
     }
@@ -115,7 +158,7 @@ router.post('/add',(async(req,res)=>{
     try {
 
       const DeliveriesByUser = await FreeDelivery
-      .find({user:user})
+      .find({'user._id':user})
    
 
     if (!DeliveriesByUser) {
@@ -133,6 +176,32 @@ router.post('/add',(async(req,res)=>{
    
    })) ;
 
+
+
+   
+   router.get('/findByAffectedUser/:affectedTo/',asyncHandler(async(req,res)=>{
+    //res.send(req.params.id)   
+    affectedTo = req.params.affectedTo;
+    try {
+
+      const DeliveriesByAffectedUser = await FreeDelivery
+      .find({affectedTo:affectedTo})
+   
+
+    if (!DeliveriesByAffectedUser) {
+      return res.status(400).json({ message: "not found " }).end()
+    }
+    
+    res.send(DeliveriesByAffectedUser);
+
+     }  catch (e) {
+    console.error(e)
+    res.status(400).end()
+    }
+
+
+   
+   })) ;
 
 
   module.exports = router;

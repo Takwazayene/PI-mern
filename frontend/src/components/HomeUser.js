@@ -13,8 +13,10 @@ import ProfileAdmin from "./admin/Profile"
 import UsersAdmin from "./admin/Users"
 import CompanyAdmin from "./admin/Company"
 import DeliveryAdmin from "./admin/Delivery"
+import claimsAdmin from   "./admin/takwa/Claims";
 import UserscircuitAdmin from "./admin/Userscircuit"
 import FreeDeliveries from "./admin/takwa/FreeDeliveries"
+import ListAffectedTo from "./admin/takwa/listAffectedTo"
 import HomeCompany from './company/Home'
 import ProfileCompany from './company/Profile'
 import DeliveryManCompany from './company/DeliveryMan'
@@ -39,6 +41,14 @@ import ListFreeDelivery2 from "./user/freeDelivery/ListDeliveries2";
 import EditDelivery from "./user/freeDelivery/editDelivery";
 import addDelivery from "./user/freeDelivery/addDelivery";
 import passedDelivery from   "./user/freeDelivery/PassedDelivery";
+import chatbot from   "./user/chatbot/chatbot";
+import simplechatbot from   "./user/simpleChatbot/chatbot";
+import claims from   "./user/simpleChatbot/claims";
+import claimsEspace from   "./user/Claim";
+import AffectedDelivery from "./user/freeDelivery/affectedDelivery"
+
+
+
 
 
 export default function HomeUser(props) {
@@ -97,6 +107,17 @@ export default function HomeUser(props) {
               <Route path="/homeuser/user/editDelivery/:id" component={EditDelivery} />
               <Route path="/homeuser/user/addDelivery" component={addDelivery} />
               <Route path="/homeuser/user/passedDelivery" component={passedDelivery} />
+              <Route path="/homeuser/user/chatbot" component={chatbot} />
+              <Route path="/homeuser/user/simplechatbot" component={simplechatbot} />
+              <Route path="/homeuser/user/claims" component={claims} />
+              <Route path="/homeuser/user/claimsEspace" component={claimsEspace} />
+              <Route path="/homeuser/user/AffectedDelivery" component={AffectedDelivery} />
+
+
+
+
+
+
 
 
               <Container>
@@ -109,7 +130,7 @@ export default function HomeUser(props) {
 
 
             </Switch>
-          </div>):(<></>)}
+          </div>):(<></>)} 
           {connectUser.role ==="admin" ? (
           <div className="col-9 " id="heigthHompage">
             <Switch>
@@ -120,6 +141,9 @@ export default function HomeUser(props) {
               <Route path="/homeuser/admin/delivery" component={DeliveryAdmin} />
               <Route path="/homeuser/admin/userscircuit" component={UserscircuitAdmin}/>
               <Route path="/homeuser/admin/listFreeDeliveries" component={FreeDeliveries}/>
+              <Route path="/homeuser/admin/listClaims" component={claimsAdmin}/>
+              <Route path="/homeuser/admin/listAffectedTo" component={ListAffectedTo}/>
+
 
 
             </Switch>

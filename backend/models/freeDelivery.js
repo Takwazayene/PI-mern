@@ -3,10 +3,7 @@ var Schema = mongoose.Schema;
 const userSchema = require('./user').schema;
 
 var freeDelivery = new Schema({
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-      },
+    user:userSchema,
 
       fromDate: {
         type: Date,
@@ -28,6 +25,10 @@ var freeDelivery = new Schema({
     type: String,
     required: [true,'name is required']
   },
+  destination:  {
+    type: String,
+    required: [true,'name is required']
+  },
   vehicle: {
     type: String,
   },
@@ -38,14 +39,14 @@ var freeDelivery = new Schema({
   constraint:  {
     type: String,
   },
+  quantite: Number ,
+  quantiteDispo:Number,
+
   packageSize: {
     type: String,
     enum: ['big', 'meduim', 'small'],
   },
-  affectedTo: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  },
+  affectedTo:String,
 
  
 });

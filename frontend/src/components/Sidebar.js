@@ -52,6 +52,14 @@ export default function Sidebar() {
                   <span className="title">Vehicle Shot</span>
                 </NavLink>
               </li>
+              <li>
+                <NavLink to="/homeuser/user/claimsEspace">
+                  <span className="icon">
+                  <i class="fa fa-file"></i>               
+                  </span>
+                  <span className="title">Claim</span>
+                </NavLink>
+              </li>
             </ul>
           </div>
         </div>
@@ -109,6 +117,15 @@ export default function Sidebar() {
                     <i className="fa fa-archive"></i>
                   </span>
                   <span className="title">Free Delivery</span>
+                </NavLink>
+
+              </li>
+              <li>
+                <NavLink to="/homeuser/admin/listClaims">
+                  <span className="icon">
+                <i class="fa fa-file"></i>               
+                 </span>
+                  <span className="title">Claims</span>
                 </NavLink>
 
               </li>

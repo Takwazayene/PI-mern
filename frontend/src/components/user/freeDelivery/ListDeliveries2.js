@@ -114,15 +114,20 @@ const onChangeSearch = (event) => {
                             <h4><span>{ moment(el.fromDate).format("MMM Do YY") }</span></h4>
                         </div>
                         <div className="post-title">
-                            <h3><a href="news-single.html"> {el.governorate}- {el.ville} </a>  
+                            <h3><a href="news-single.html"> {el.governorate} -- {el.destination} </a>  
                             <button className="btn btn-dark"  onClick={()=>update( el._id)} >edit <i className="fa fa-angle-right" /> </button> 
                             &nbsp;&nbsp;  <button  onClick={()=>remove( el._id)}  className="btn btn-danger"  > <FontAwesomeIcon icon={faTrash} /> </button> </h3>
                                        
 
                             <details>
                                 state: {el.state} <br/>
+                                to date: {el.toDate} <br/>
+                                ville: {el.ville} <br/>
                                 vehicle: {el.vehicle}<br/>
-                                package size:{el.packageSize}<br/>
+                                quantite: {el.quantite}<br/>
+                                quantite available: {el.quantiteDispo}<br/>
+
+                                package size: {el.packageSize}<br/>
                                 constraint: {el.constraint}<br/>
 
 

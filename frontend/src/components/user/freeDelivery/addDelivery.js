@@ -15,18 +15,31 @@ import "../../../styles/user/style.css";
 
  function AddDelivery(props) {
 	const [connectUser, error] = useSelector(selectConnectuser);
-	const user=connectUser.id;
+//	const user=connectUser.id;
+
+	const user = {
+		_id:connectUser.id,
+		username:connectUser.username,
+		email:connectUser.email,
+		password:"password",
+		adresse:connectUser.adresse,
+		phone:connectUser.phone,
+		role:connectUser.role,
+	}
 
 	const [fromDate, setFromDate] = useState("");
   const [toDate, setToDate] = useState("");
   const [governorate, setGovernorate] = useState("");
+  const [  destination, setDestination] = useState("");
+
   const [ville, setVille] = useState("");
   const [vehicle, setVehicule] = useState("");
 
   const [state, setState] = useState("valid");
-  const [constraint, setConstraint] = useState("");
+  const [constraint, setConstraint] = useState("nothing");
   const [packageSize, setPackageSize] = useState("");
-
+  const [quantite, setQuantite] = useState();
+  const [quantiteDispo, setQuantiteDispo] = useState("");
 
   /*constructor(props) {
     super(props);
@@ -56,17 +69,21 @@ const dispatch = useDispatch();
 const handleSubmit = event => {
         event.preventDefault();
 
-
+        // setState({[quantiteDispo]:quantite}) 
+		 console.log(quantiteDispo);
         const freeDelivery = {
           user,
          fromDate,
          toDate,
           governorate,
+		  destination,
           ville,
           vehicle,
          state,
          constraint,
         packageSize,
+		quantite,
+		quantiteDispo
 		
             
 
@@ -167,6 +184,15 @@ const handleSubmit = event => {
                     value={state.ville}
                     onChange={(e) => setVille(e.target.value)}/>
 				</div>
+
+				<div className="wrap-input100 validate-input bg1" data-validate="Please Type Your Name">
+					<span className="label-input100">destination</span>
+					<input 
+                    className="input100" type="text"className="form-control my-3 p-4"
+                    name="destination"
+                    value={state.destination}
+                    onChange={(e) => setDestination(e.target.value)}/>
+				</div>
                 
                 <div className="wrap-input100 input100-select bg1">
 					<span className="label-input100">vehicle </span>
@@ -192,6 +218,20 @@ const handleSubmit = event => {
 						</select>
 						<div className="dropDownSelect2"></div>
 					</div>
+				</div>
+
+				<div className="wrap-input100 validate-input bg1" data-validate="Please Type Your Name">
+					<span className="label-input100">quantite</span>
+					<input 
+                    className="input100" type="number"classNameName="form-control my-3 p-4"
+                    name="quantite"
+                    value={state.quantite }
+                    onChange={(e) => setQuantite(e.target.value) }
+
+					
+
+						
+					 />
 				</div>
 
 

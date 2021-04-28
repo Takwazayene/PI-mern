@@ -17,6 +17,8 @@ var authRouter = require('./routes/auth');
 var mailRouter = require('./routes/mail');
 var freeDeliveryRouter = require('./routes/freeDelivery');
 var smsRouter = require('./routes/sms');
+var claimRouter = require('./routes/claim');
+
 
 const twilio = require('twilio') ;
 var app = express();
@@ -60,6 +62,8 @@ app.use('/auth', authRouter);
 app.use('/mail', mailRouter);
 app.use('/freeDelivery',freeDeliveryRouter)
 app.use('/sms',smsRouter)
+app.use('/claim',claimRouter)
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

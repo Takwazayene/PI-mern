@@ -23,7 +23,8 @@ function ListFreeDelivery2(props) {
   const [search,setSearch]= useState("");
   const [SearchTerms,setSearchTerms] = useState("");
   const [connectUser, error] = useSelector(selectConnectuser);
-  const idUser=connectUser.id;
+  const affectedTo=connectUser.email;
+
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -33,11 +34,11 @@ function ListFreeDelivery2(props) {
     })
 }, []);
 
-function passedDelivery (id,state) {
-    if (state == "valid")
+function passedDelivery (id,state,quantiteDispo) {
+    if (quantiteDispo != 0)
 {
     console.log(id)
-    axios.put('http://localhost:5000/freeDelivery/passedDelivery/'+id+ '/' + idUser).then(response => {
+    axios.put('http://localhost:5000/freeDelivery/passedDelivery/'+id+ '/' + affectedTo+ '/' +quantiteDispo ).then(response => {
       console.log(response.data);
       toast.success('your delivery has successfully passed !',{position:toast.POSITION.BOTTOM_RIGHT});
     })
@@ -127,15 +128,19 @@ function remove(id){
                             <h4><span>{ moment(el.fromDate).format("MMM Do YY") }</span></h4>
                         </div>
                         <div className="post-title">
-                            <h3><a href="news-single.html"> {el.governorate}- {el.ville} </a>  
-                            <button className="btn btn-dark"  onClick={()=>passedDelivery( el._id,el.state)} >Passed delivery <i className="fa fa-angle-right" /> </button> 
+                            <h3><a href="news-single.html"> {el.governorate}- {el.destination} </a>  
+                            <button className="btn btn-dark"  onClick={()=>passedDelivery( el._id,el.state,el.quantiteDispo)} >Passed delivery <i className="fa fa-angle-right" /> </button> 
                             &nbsp;&nbsp;  </h3>
                                        
 
                             <details>
+                                author: {el.user.email} <br/>
                                 state: {el.state} <br/>
+                                ville: {el.ville} <br/>
                                 vehicle: {el.vehicle}<br/>
-                                package size:{el.packageSize}<br/>
+                                quantite: {el.quantite}<br/>
+                                quantite disponible: {el.quantiteDispo}<br/>
+                                package size: {el.packageSize}<br/>
                                 constraint: {el.constraint}<br/>
 
 
