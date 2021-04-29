@@ -121,7 +121,7 @@ const onChangeSearch = (event) => {
 
                             <details>
                                 state: {el.state} <br/>
-                                to date: {el.toDate} <br/>
+                                to date: { moment(el.toDate).format("DD/MM/YY") } <br/>
                                 ville: {el.ville} <br/>
                                 vehicle: {el.vehicle}<br/>
                                 quantite: {el.quantite}<br/>

@@ -114,7 +114,7 @@ const onChangeSearch = (event) => {
   
   <tr>
     
-    <td>{el.dateClaim}</td>
+    <td>{ moment(el.dateClaim).format("DD/MM/YYYY")}</td>
 
     <td>{el.date}</td>
     <td>{el.QRcode}</td>

@@ -107,4 +107,83 @@ router.post('/add',(async(req,res)=>{
  })) ;
 
 
+
+ router.get('/countDelay',async function(req,res) {
+    
+  Claim.countDocuments({ type: "delivery delay" }, function (err, result) {
+  if (err) {
+    console.log(err);
+  } else {
+    res.json(result);
+
+  }
+
+  if (result > 0) {
+    console.log(result);
+  }
+});
+
+   
+   }) ;
+
+
+
+   router.get('/countNR',async function(req,res) {
+    
+    Claim.countDocuments({ type: "delivery not received" }, function (err, result) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.json(result);
+  
+    }
+  
+    if (result > 0) {
+      console.log(result);
+    }
+  });
+  
+     
+     }) ;
+
+
+     router.get('/countPBS',async function(req,res) {
+    
+      Claim.countDocuments({ type: "package in bad state" }, function (err, result) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.json(result);
+    
+      }
+    
+      if (result > 0) {
+        console.log(result);
+      }
+    });
+    
+       
+       }) ;
+
+       router.get('/countOther',async function(req,res) {
+    
+        Claim.countDocuments({ type: "other" }, function (err, result) {
+        if (err) {
+          console.log(err);
+        } else {
+          res.json(result);
+      
+        }
+      
+        if (result > 0) {
+          console.log(result);
+        }
+      });
+      
+         
+         }) ;
+
+
+
+
   module.exports = router;

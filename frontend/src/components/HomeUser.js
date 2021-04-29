@@ -17,6 +17,8 @@ import claimsAdmin from   "./admin/takwa/Claims";
 import UserscircuitAdmin from "./admin/Userscircuit"
 import FreeDeliveries from "./admin/takwa/FreeDeliveries"
 import ListAffectedTo from "./admin/takwa/listAffectedTo"
+import Chart from "./admin/takwa/Chart"
+
 import HomeCompany from './company/Home'
 import ProfileCompany from './company/Profile'
 import DeliveryManCompany from './company/DeliveryMan'
@@ -143,6 +145,7 @@ export default function HomeUser(props) {
               <Route path="/homeuser/admin/listFreeDeliveries" component={FreeDeliveries}/>
               <Route path="/homeuser/admin/listClaims" component={claimsAdmin}/>
               <Route path="/homeuser/admin/listAffectedTo" component={ListAffectedTo}/>
+              <Route path="/homeuser/admin/chart" component={Chart}/>
 
 
 

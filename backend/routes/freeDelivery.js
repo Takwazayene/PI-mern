@@ -177,7 +177,7 @@ $push:{
    })) ;
 
 
-
+  
    
    router.get('/findByAffectedUser/:affectedTo/',asyncHandler(async(req,res)=>{
     //res.send(req.params.id)   
@@ -185,7 +185,7 @@ $push:{
     try {
 
       const DeliveriesByAffectedUser = await FreeDelivery
-      .find({affectedTo:affectedTo})
+      .find({ affectedTo:affectedTo})
    
 
     if (!DeliveriesByAffectedUser) {

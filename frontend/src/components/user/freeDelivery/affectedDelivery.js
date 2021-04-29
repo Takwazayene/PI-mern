@@ -21,10 +21,10 @@ function AffectedDelivery(props) {
   const [search,setSearch]= useState("");
   const [SearchTerms,setSearchTerms] = useState("");
   const [connectUser, error] = useSelector(selectConnectuser);
-  const user=connectUser.id;
+  const affectedTo=connectUser.email;
   const dispatch = useDispatch();
   useEffect(() => {
-    axios.get('http://localhost:5000/freeDelivery/findByAffectedUser/'+user).then(response => {
+    axios.get('http://localhost:5000/freeDelivery/findByAffectedUser/'+affectedTo).then(response => {
         setDeliveries(response.data)
         console.log(response.data)
     })

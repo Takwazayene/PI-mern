@@ -129,6 +129,16 @@ export default function Sidebar() {
                 </NavLink>
 
               </li>
+              
+              <li>
+                <NavLink to="/homeuser/admin/chart">
+                  <span className="icon">
+                  <i class="fa fa-circle"></i>
+                                                     </span>
+                  <span className="title">Chart</span>
+                </NavLink>
+
+              </li>
             </ul>
           </div>
         </div>

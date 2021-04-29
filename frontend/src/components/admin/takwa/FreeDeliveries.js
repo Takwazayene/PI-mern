@@ -67,8 +67,8 @@ function deliveriesAffectedTo(idDel) {
      <td  style={{ background: color  }}>{delivery.user.email}</td>
       : null
 }
-      <td  style={{ background: color  }}>{delivery.fromDate}</td>
-      <td  style={{ background: color  }}>{delivery.toDate}</td>
+      <td  style={{ background: color  }}>{ moment(delivery.fromDate).format("DD/MM/YY")}</td>
+      <td  style={{ background: color  }}>{ moment(delivery.toDate).format("DD/MM/YY")}</td>
       <td  style={{ background: color  }}>{delivery.governorate}</td>
       <td  style={{ background: color  }}>{delivery.ville}</td>
       <td  style={{ background: color  }}>{delivery.destination}</td>

@@ -92,7 +92,7 @@ else
       
     <tr  {...claim.etat == "pending" ? color="#ff8080": color ="#80c1ff"  }   key={claim._id}>
       <th  scope="row">{index}</th>
-      <td>{claim.dateClaim}</td>
+      <td>{ moment(claim.dateClaim).format("DD/MM/YYYY")}</td>
       <td>{claim.date}</td>
       <td>{claim.QRcode}</td>
       <td>{claim.type}</td>

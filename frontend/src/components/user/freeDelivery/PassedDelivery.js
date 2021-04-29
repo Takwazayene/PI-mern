@@ -136,6 +136,8 @@ function remove(id){
                             <details>
                                 author: {el.user.email} <br/>
                                 state: {el.state} <br/>
+                                to Date: {moment(el.toDate).format("DD/MM/YY")} <br/>
+
                                 ville: {el.ville} <br/>
                                 vehicle: {el.vehicle}<br/>
                                 quantite: {el.quantite}<br/>
