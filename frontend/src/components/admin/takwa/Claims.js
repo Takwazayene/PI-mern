@@ -21,6 +21,12 @@ export default function Users(props) {
   const [users, err] = useSelector(selectUsers);
   const [pageNumber, setPageNumber]= useState(0);
   const [claims,setClaims]= useState([]);
+ // const [conversationId, setConversationId] = useState("");
+  const [sender, setSender] = useState("");
+  const [text, setText] = useState("Hi, we are in the process of your complaint . If you have something else to talk to us  please send us a feedback on this message");
+
+ 
+  var conversationId;
 
   console.log(users);
   var color ="0";
@@ -32,7 +38,7 @@ export default function Users(props) {
     })
 }, []);
 
-  const usersPerPage = 5;
+  const usersPerPage = 10;
   const pagesVisited = pageNumber * usersPerPage;
 
 function jsPdfGenerator(date,QRcode,type,description) {
@@ -51,16 +57,71 @@ function jsPdfGenerator(date,QRcode,type,description) {
 
 }
 
+function idconv (client,id){
+  const sender = connectUser.id;
+
+  axios.get('http://localhost:5000/conversations/findID/'+client+'/'+id).then(response => {
+    console.log(response.data);
+   // setConversationId(response.data);
+   conversationId=response.data;
+    console.log(conversationId);
+
+    const message = {
+
+      conversationId,
+      sender,
+      text
+    }
+
+    axios.post(`http://localhost:5000/messages/`, message)
+    .then(async res => {
+      //  console.log(res.data.data._id)
+        if (res.status === 200 || res.status === 201 ) {
+            console.log("success message claim")
+       
+  
+        } else {
+            
+            console.log(' none ')
+        }
+    })
+  
+  
+
+   // conversationId =response.data;
+  })
+}
 
 
-  function accept (id,etat) {
+
+  function accept (id,etat,client) {
+    
+    //var conversationId ;
     if (etat != "treated")
 {
+  idconv(client,connectUser.id)
+
+
+ 
+
+
+
     console.log(id)
+    console.log(conversationId);
     axios.put('http://localhost:5000/claim/accept/'+id).then(response => {
       console.log(response.data);
-      toast.success('The complaint is treated successfully',{position:toast.POSITION.BOTTOM_RIGHT});
+      toast.success('the complaint is treated successfully',{position:toast.POSITION.BOTTOM_RIGHT});
+      toast.info('an information message is sent to the customer',{position:toast.POSITION.BOTTOM_RIGHT});
+
     })
+
+    axios.get('http://localhost:5000/claim').then(response => {
+      setClaims(response.data)
+      console.log(response.data)
+
+  })
+
+
 }
 else 
 {
@@ -77,6 +138,12 @@ function refuse (id,etat) {
       console.log(response.data);
       toast.success('The complaint is refused successfully',{position:toast.POSITION.BOTTOM_RIGHT});
     })
+
+    axios.get('http://localhost:5000/claim').then(response => {
+      setClaims(response.data)
+      console.log(response.data)
+
+  })
 }
 else 
 {
@@ -104,7 +171,7 @@ else
 
       <td >
         <span className="icon mr-3">
-        <button  onClick={()=>accept( claim._id,claim.etat)} > 
+        <button  onClick={()=>accept( claim._id,claim.etat,claim.userId)} > 
 
           <i class="fa fa-check-circle" style={{color : "green"}}></i>
           </button> 

@@ -18,6 +18,8 @@ var mailRouter = require('./routes/mail');
 var freeDeliveryRouter = require('./routes/freeDelivery');
 var smsRouter = require('./routes/sms');
 var claimRouter = require('./routes/claim');
+var conversationRouter = require('./routes/conversations');
+var messageRouter = require('./routes/messages');
 
 
 const twilio = require('twilio') ;
@@ -63,6 +65,9 @@ app.use('/mail', mailRouter);
 app.use('/freeDelivery',freeDeliveryRouter)
 app.use('/sms',smsRouter)
 app.use('/claim',claimRouter)
+app.use('/conversations',conversationRouter)
+app.use('/messages',messageRouter)
+
 
 
 // catch 404 and forward to error handler

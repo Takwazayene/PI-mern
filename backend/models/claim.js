@@ -4,6 +4,10 @@ const userSchema = require('./user').schema;
 
 var claim = new Schema({
   user: { type: String},
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: 'users'
+  },
 
   dateClaim : Date,
 

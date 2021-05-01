@@ -41,6 +41,11 @@ function passedDelivery (id,state,quantiteDispo) {
     axios.put('http://localhost:5000/freeDelivery/passedDelivery/'+id+ '/' + affectedTo+ '/' +quantiteDispo ).then(response => {
       console.log(response.data);
       toast.success('your delivery has successfully passed !',{position:toast.POSITION.BOTTOM_RIGHT});
+})
+
+axios.get('http://localhost:5000/freeDelivery').then(response => {
+        setDeliveries(response.data)
+        console.log(response.data)
     })
 }
 else 

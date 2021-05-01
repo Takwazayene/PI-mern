@@ -38,8 +38,13 @@ function update (id) {
 function remove(id){
 
     axios.delete('http://localhost:5000/freeDelivery/'+id).then(response => {
-        props.history.push("/homeuser/user/listDeliveries")
-        console.log(response.data);
+        //window.refresh();
+
+        //props.history.push("/homeuser/user/listDeliveries")
+
+        axios.get('http://localhost:5000/freeDelivery/findByUser/'+user).then(response => {
+        setDeliveries(response.data)
+    })
     })
 
 }

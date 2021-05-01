@@ -18,6 +18,8 @@ import UserscircuitAdmin from "./admin/Userscircuit"
 import FreeDeliveries from "./admin/takwa/FreeDeliveries"
 import ListAffectedTo from "./admin/takwa/listAffectedTo"
 import Chart from "./admin/takwa/Chart"
+import Chat from "./admin/takwa/chat/messenger"
+
 
 import HomeCompany from './company/Home'
 import ProfileCompany from './company/Profile'
@@ -114,6 +116,7 @@ export default function HomeUser(props) {
               <Route path="/homeuser/user/claims" component={claims} />
               <Route path="/homeuser/user/claimsEspace" component={claimsEspace} />
               <Route path="/homeuser/user/AffectedDelivery" component={AffectedDelivery} />
+              <Route path="/homeuser/user/chat" component={Chat} />
 
 
 
@@ -146,6 +149,8 @@ export default function HomeUser(props) {
               <Route path="/homeuser/admin/listClaims" component={claimsAdmin}/>
               <Route path="/homeuser/admin/listAffectedTo" component={ListAffectedTo}/>
               <Route path="/homeuser/admin/chart" component={Chart}/>
+              <Route path="/homeuser/admin/chat" component={Chat}/>
+
 
 
 

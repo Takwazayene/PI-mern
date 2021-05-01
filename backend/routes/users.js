@@ -11,13 +11,13 @@ const verifAuth = (req, res, next)=>{
 }
 
 /* GET users listing. */
-router.get('/' ,verifAuth , async (req, res) => {
+router.get('/'  , async (req, res) => {
   
   var users = await userModel.find()
   res.send(users);
 });
 
-router.get('/:id' ,verifAuth , async (req, res) => {
+router.get('/:id'  , async (req, res) => {
   var user = await userModel.findById(req.params.id)
   res.send(user);
 });

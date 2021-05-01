@@ -14,6 +14,7 @@ import { format } from 'date-fns';
 export default function Chatbot (){
   const [connectUser, error] = useSelector(selectConnectuser);
 const user=connectUser.email;
+const userId=connectUser.id;
 
 
 
@@ -67,6 +68,7 @@ const theme = {
       type,
       etat,
       user,
+      userId,
 
       description
     

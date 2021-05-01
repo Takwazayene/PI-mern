@@ -60,6 +60,14 @@ export default function Sidebar() {
                   <span className="title">Claim</span>
                 </NavLink>
               </li>
+              <li>
+                <NavLink to="/homeuser/user/chat">
+                  <span className="icon">
+                  <i class="fa fa-comments"></i>          
+                          </span>
+                  <span className="title">Chat</span>
+                </NavLink>
+              </li>
             </ul>
           </div>
         </div>
@@ -134,6 +142,15 @@ export default function Sidebar() {
                 <NavLink to="/homeuser/admin/chart">
                   <span className="icon">
                   <i class="fa fa-circle"></i>
+                                                     </span>
+                  <span className="title">Chart</span>
+                </NavLink>
+
+              </li>   
+              <li>
+                <NavLink to="/homeuser/admin/chat">
+                  <span className="icon">
+                  <i class="fa fa-comments"></i>          
                                                      </span>
                   <span className="title">Chart</span>
                 </NavLink>
